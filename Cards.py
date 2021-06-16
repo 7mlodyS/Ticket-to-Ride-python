@@ -14,6 +14,7 @@ class TrainCard(Card):
     def __init__(self, color):
         self.color = color
 
+    # Sprawdza czy karta jest specjalna (joker)
     def is_special(self):
         return self.color == 'joker'
 
@@ -26,6 +27,7 @@ class TicketCard(Card):
         self.city2 = city2
         self.points = points
 
+    # Sprawdza czy karta jest specjalna (długa trasa)
     def is_special(self):
         return self.points > 13
 
@@ -37,14 +39,17 @@ class Deck():
         self.pile = pile
         self.discarded = []
 
+    # Zwraca kartę z góry tali (dobranie karty)
     def draw(self):
         return self.pile.pop(0)
 
+    # Dodaje kartę do listy kart odrzuconych (wykorzystanie karty)
     def add_discarded(self, card):
         self.discarded = card
     
+    # Tasuje wykorzystane kart i dokłada je pod talię
     def __restock(self):
         while self.discarded:
             temp = choice(self.discarded)
             self.pile.append(temp)
-            self.pile.remove(temp)
+            self.discarded.remove(temp)
