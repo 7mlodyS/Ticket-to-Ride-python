@@ -1,6 +1,8 @@
 class Route():
-    def __init__(self, length, locomotives, data, is_tunnel):
-        self.lenght = length
+    def __init__(self, City1, City2, length, locomotives, data, is_tunnel):
+        self.City1 = City1
+        self.City2 = City2
+        self.length = length
         self.locomotives = locomotives
         self.data = data
         self.is_tunnel = is_tunnel
@@ -20,24 +22,32 @@ class Route():
         res = ''
         for el in self.data:
             if not el[1]:
-                res += f'color: {el[0]}, length: {self.lenght}'
+                res += f'city1: {self.City1.name}, city2: {self.City2.name}, color: {el[0]}, length: {self.length}, locomotives: {self.locomotives}, tunnel: {self.is_tunnel}'
         return res
 
+
+
 class City():
-    def __init__(self, Routes, name):
-        self.Routes = Routes
+    def __init__(self, name):
+        self.Routes = []
         self.name = name
         self.station = None
 
+    # Dodaje trasę do listy tras wychodzących z tego miasta
+    def add_Route(self, Route):
+        self.Routes.append(Route)
+
     # Sprawdza czy w mieście już znajduje się stacja
     def is_occupied(self):
-        return self.Station != None
+        return self.station != None
 
     def to_str(self):
         res = f'name: {self.name}, list of routes:\n'
         for route in self.Routes:
             res += f'    {route.to_str()}\n'
         return res
+
+
 
 class Board():
     def __init__(self, Cities, Routes, faceupCards):
@@ -58,4 +68,5 @@ class Board():
         res = ''
         for route in self.Routes:
             if not route.is_claimed():
-                res += f'{route.to_str()}, '
+                res += f'{route.to_str()}, \n'
+        return res
