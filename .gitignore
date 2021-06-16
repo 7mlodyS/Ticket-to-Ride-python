@@ -2,3 +2,9 @@
 opis-projektu.aux
 opis-projektu.log
 opis-projektu.tex
+
+# Do testów
+tests.py
+
+#Inne
+__pycache__/*
