@@ -26,9 +26,10 @@ def gen_board():
 
 def gen_players(n):
     # zapytac o imie gracza
-    players = [Player(f'bot-{i}') for i in range(n-1)]
-    name = input('Podaj nazwę gracza: ')
-    players.append(Player(name))
+    players = [Player(f'bot_{i}', True) for i in range(n-1)]
+    print('Podaj nazwę gracza: ')
+    name = input()
+    players.append(Player(name, False))
     return players
 
 def gen_traincards():
@@ -56,14 +57,14 @@ def menu():
 =======================
 '''
     print(m)
-
+    print('Podaj liczbe graczy: ')
     players_num = input()
     return int(players_num)
 
 if __name__ == '__main__':
     players_num = menu()
-    gen_players(players_num)
+    players = gen_players(players_num)
 
-    new_game = Game(gen_board(), gen_players(players_num), gen_traindeck(), gen_ticketdeck())
+    new_game = Game(gen_board(), players, gen_traindeck(), gen_ticketdeck())
 
     new_game.start()

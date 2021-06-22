@@ -1,17 +1,23 @@
 class Player():
-    def __init__(self, name):
+    def __init__(self, name, is_bot):
         self.name = name
         self.points = 0
         self.trains = 45
         self.stations = 3
         self.__TrainCards = []
         self.__TicketCards = []
+        self.is_bot = is_bot
 
-    def add_TrainCard(self, card):
-        self.__TrainCards.append(card)
+    def add_TrainCards(self, cards):
+        for card in cards:
+            self.__TrainCards.append(card)
 
-    def add_TicketCard(self, card):
-        self.__TicketCards.append(card)
+    def add_TicketCards(self, cards):
+        for card in cards:
+            self.__TicketCards.append(card)
+    
+    def no_tickets(self):
+        return len(self.__TicketCards)
 
     # Tworzy słownik z kartami pociągów gracza
     def __gen_dict_TrainCard(self):

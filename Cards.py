@@ -52,6 +52,15 @@ class Deck():
     # Dodaje kartę do listy kart odrzuconych (wykorzystanie karty)
     def add_discarded(self, card):
         self.discarded = card
+
+    def shuffle(self):
+        res = []
+        for i in range(len(self.pile)):
+            c = choice(self.pile)
+            res.append(c)
+            self.pile.remove(c)
+        self.pile = res
+
     
     # Tasuje wykorzystane kart i dokłada je pod talię
     def __restock(self):

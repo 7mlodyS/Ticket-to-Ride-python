@@ -87,6 +87,61 @@ tickets = [{
     'city1' : 'Berlin',
     'city2' : 'Warszawa',
     'points' : 5
+},
+{
+    'city1' : 'Berlin',
+    'city2' : 'Warszawa',
+    'points' : 5
+},
+{
+    'city1' : 'Berlin',
+    'city2' : 'Warszawa',
+    'points' : 5
+},
+{
+    'city1' : 'Berlin',
+    'city2' : 'Warszawa',
+    'points' : 5
+},
+{
+    'city1' : 'Berlin',
+    'city2' : 'Warszawa',
+    'points' : 5
+},
+{
+    'city1' : 'Berlin',
+    'city2' : 'Warszawa',
+    'points' : 5
+},
+{
+    'city1' : 'Berlin',
+    'city2' : 'Warszawa',
+    'points' : 5
+},
+{
+    'city1' : 'Berlin',
+    'city2' : 'Warszawa',
+    'points' : 5
+},
+{
+    'city1' : 'Berlin',
+    'city2' : 'Warszawa',
+    'points' : 5
+},
+{
+    'city1' : 'Berlin',
+    'city2' : 'Warszawa',
+    'points' : 5
+},
+{
+    'city1' : 'Berlin',
+    'city2' : 'Warszawa',
+    'points' : 5
+},
+{
+    'city1' : 'Berlin',
+    'city2' : 'Warszawa',
+    'points' : 5
 }]
 
 

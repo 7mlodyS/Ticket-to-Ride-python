@@ -71,3 +71,8 @@ class Board():
             if not route.is_claimed():
                 res += f'{route.to_str()}, \n'
         return res
+
+    # Dokłada karty na stół
+    def add_faceup_cards(self, cards):
+        for card in cards:
+            self.faceupCards.append(card)
