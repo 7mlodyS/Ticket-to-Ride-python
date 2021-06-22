@@ -18,7 +18,7 @@ class TrainCard(Card):
 
     # Sprawdza czy karta jest specjalna (joker)
     def is_special(self):
-        return self.color == 'joker'
+        return self.color == 'locoomotive'
 
     def to_str(self):
         return self.color

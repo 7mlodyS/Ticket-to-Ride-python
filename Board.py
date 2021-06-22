@@ -76,3 +76,22 @@ class Board():
     def add_faceup_cards(self, cards):
         for card in cards:
             self.faceupCards.append(card)
+
+    # Wypisuje karty na stole
+    def to_str_faceup(self):
+        res = ''
+        i = 1
+        for card in self.faceupCards:
+            res += f'{i}.  '
+            res += card.to_str()
+            res += '\n'
+            i += 1
+        return res
+
+    # Zwraca wybrane karty z planszy i podmienia na nowe
+    def pick_faceup(self, numbers, cards):
+        res = []
+        for number in numbers:
+            res.append(self.faceupCards[number])
+        self.add_faceup_cards(cards)
+        return res

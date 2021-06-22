@@ -7,5 +7,6 @@ opis-projektu.tex
 tests.py
 
 #Inne
+__pycache__
 __pycache__/*
 todo.txt
