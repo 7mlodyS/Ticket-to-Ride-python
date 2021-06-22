@@ -4,6 +4,7 @@ class Route():
         self.City2 = City2
         self.length = length
         self.locomotives = locomotives
+        # data = lista dwuelementowych list [[ string : color, boolean : is_occupied]]
         self.data = data
         self.is_tunnel = is_tunnel
 
@@ -50,10 +51,10 @@ class City():
 
 
 class Board():
-    def __init__(self, Cities, Routes, faceupCards):
+    def __init__(self, Cities, Routes):
         self.Cities = Cities
         self.Routes = Routes
-        self.faceupCards = faceupCards
+        self.faceupCards = []
 
     # Zwraca string z wolymi miastami
     def to_str_freeCities(self):

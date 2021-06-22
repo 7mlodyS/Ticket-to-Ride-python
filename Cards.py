@@ -10,6 +10,8 @@ class Card(ABC):
     def to_str():
         pass
 
+
+
 class TrainCard(Card):
     def __init__(self, color):
         self.color = color
@@ -20,6 +22,8 @@ class TrainCard(Card):
 
     def to_str(self):
         return self.color
+
+
 
 class TicketCard(Card):
     def __init__(self, city1, city2, points):
@@ -34,14 +38,16 @@ class TicketCard(Card):
     def to_str(self):
         return f'From: {self.city1} To: {self.city2} - points: {self.points}'
 
+
+
 class Deck():
     def __init__(self, pile):
         self.pile = pile
         self.discarded = []
 
     # Zwraca kartę z góry tali (dobranie karty)
-    def draw(self):
-        return self.pile.pop(0)
+    def draw(self, n):
+        return [self.pile.pop(0) for i in range(n)]
 
     # Dodaje kartę do listy kart odrzuconych (wykorzystanie karty)
     def add_discarded(self, card):
