@@ -27,7 +27,6 @@ def gen_board():
     return Board(cities, routes)
 
 def gen_players(n):
-    # zapytac o imie gracza
     players = [Player(f'bot_{i}', True) for i in range(n-1)]
     print('Podaj nazwę gracza: ')
     name = input()
@@ -35,11 +34,12 @@ def gen_players(n):
     return players
 
 def gen_traincards():
-    # sprawdzić ilość kart !!!
     res = []
     for color in colors:
-        for i in range(8):
+        for i in range(12):
             res.append(TrainCard(color))
+    for i in range(14):
+        res.append(TrainCard('locomotive'))
     return res
 
 def gen_ticketcards():
@@ -54,14 +54,18 @@ def gen_ticketdeck():
 
 def menu():
     m = '''
-=======================
-    Ticket to Ride
-=======================
+==============================================
+          Ticket to Ride - Europe
+==============================================
 '''
     print(m)
-    print('Podaj liczbe graczy: ')
-    players_num = input()
-    return int(players_num)
+    print('Podaj liczbe graczy: (4 lub 5)')
+    while True:
+        players_num = input()
+        if players_num < '4' or players_num > '5':
+            print('Podaj poprawną liczbę graczy!')
+        else:
+            return int(players_num)
 
 if __name__ == '__main__':
     players_num = menu()

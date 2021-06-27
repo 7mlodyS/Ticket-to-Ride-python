@@ -9,8 +9,11 @@ class Route():
         self.is_claimed = is_claimed
 
     def to_str(self):
-        res = f'city1: {self.city1}, city2: {self.city2}, color: {self.color}, length: {self.length}, locomotives: {self.locomotives}, tunnel: {self.is_tunnel}, claimed?: {self.is_claimed}'
-        return res
+        # res = f'city1: {self.city1}, city2: {self.city2}, color: {self.color}, length: {self.length}, locomotives: {self.locomotives}, tunnel: {self.is_tunnel}, claimed?: {self.is_claimed}'
+        if self.is_tunnel:
+            return f'{self.city1} -> {self.city2} -- tunel'
+        else:
+            return f'{self.city1} -> {self.city2}'
 
     def claim(self, player):
         self.is_claimed = player.name
@@ -32,8 +35,6 @@ class City():
 
     def to_str(self):
         res = f'name: {self.name}, list of routes:\n'
-        for route in self.Routes:
-            res += f'    {route.to_str()}\n'
         return res
 
 

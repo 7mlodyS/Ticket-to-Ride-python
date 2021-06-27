@@ -36,7 +36,7 @@ class Player():
 
     # Tworzy słownik z kartami pociągów gracza
     def __gen_dict_TrainCard(self):
-        colors = ['white', 'black', 'red', 'blue', 'pink', 'green', 'orange', 'yellow']
+        colors = ['white', 'black', 'red', 'blue', 'pink', 'green', 'orange', 'yellow', 'locomotive']
         d = {c : 0 for c in colors}
         for card in self.__TrainCards:
             d.update({card.color : d[card.color] + 1})
@@ -48,20 +48,34 @@ class Player():
         res = []
         for route in Board.Routes:
             if not route.is_claimed:
-                if route.color == 'any':
-                    for key in d:
-                        if d[key] >= route.length:
+                if route.locomotives > 0:
+                    if d['locomotive'] >= route.locomotives:
+                        if route.color == 'any':
+                            for key in d:
+                                if d[key] >= route.length:
+                                    res.append(route)
+                                    break
+                        elif d[route.color] >= route.length:
                             res.append(route)
-                            break
-                elif d[route.color] >= route.length:
-                    res.append(route)
+                else:
+                    if route.color == 'any':
+                        for key in d:
+                            if d[key] >= route.length:
+                                res.append(route)
+                                break
+                    elif d[route.color] >= route.length:
+                        res.append(route)
+
         return res
+    
+    def does_have(self, n, color):
+        d = self.__gen_dict_TrainCard()
+        return d[color] >= n
 
     def gen_possible_Cities(self, Board):
         res = []
         for city in Board.Cities:
             if not city.is_occupied():
-                print(city.to_str())
                 is_reachable = False
                 for route in city.Routes:
                     if route.is_claimed == self.name:
@@ -78,6 +92,16 @@ class Player():
         for key in d:
             if d[key] >= n:
                 res.append(key)
+        return res
+
+    def info(self):
+        res = f'Informacje o graczu\nIlość wagoników: {self.trains}\nKarty tras:\n'
+        for card in self.__TicketCards:
+            res += f'  {card.to_str()}\n'
+
+        d = self.__gen_dict_TrainCard()
+        for key in d:
+            res += f'  {key} : {d[key]}\n'
         return res
 
     def to_str(self):
