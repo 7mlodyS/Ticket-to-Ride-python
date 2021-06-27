@@ -50,8 +50,9 @@ class Deck():
         return [self.pile.pop(0) for i in range(n)]
 
     # Dodaje kartę do listy kart odrzuconych (wykorzystanie karty)
-    def add_discarded(self, card):
-        self.discarded = card
+    def add_discarded(self, cards):
+        for card in cards:
+            self.discarded.append(card)
 
     def shuffle(self):
         res = []

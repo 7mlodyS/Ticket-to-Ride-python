@@ -10,19 +10,21 @@ data_routes = GameData().routes
 data_cities = GameData().cities
 data_ticekts = GameData().tickets
 
-def gen_cities():
+def gen_cities(routes):
     cities = [City(name) for name in data_cities]
     for city in cities:
-        for route in gen_routes():
-            if route.City1 == city.name or route.City2 == city.name:
+        for route in routes:
+            if route.city1 == city.name or route.city2 == city.name:
                 city.add_Route(route)
     return cities        
 
 def gen_routes():
-    return [Route(route['city1'], route['city2'], route['length'], route['locomotives'], route['data'], route['is_tunnel']) for route in data_routes]
+    return [Route(route['city1'], route['city2'], route['length'], route['locomotives'], route['color'], route['is_tunnel'], route['is_claimed']) for route in data_routes]
 
 def gen_board():
-    return Board(gen_cities(), gen_routes())
+    routes = gen_routes()
+    cities = gen_cities(routes)
+    return Board(cities, routes)
 
 def gen_players(n):
     # zapytac o imie gracza

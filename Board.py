@@ -1,31 +1,19 @@
 class Route():
-    def __init__(self, City1, City2, length, locomotives, data, is_tunnel):
-        self.City1 = City1
-        self.City2 = City2
+    def __init__(self, city1, city2, length, locomotives, color, is_tunnel, is_claimed):
+        self.city1 = city1
+        self.city2 = city2
         self.length = length
         self.locomotives = locomotives
-        # data = lista dwuelementowych list [[ string : color, boolean : is_occupied]]
-        self.data = data
+        self.color = color
         self.is_tunnel = is_tunnel
+        self.is_claimed = is_claimed
 
-    # Sprawdza czy trasa jest podwójna
-    def is_double(self):
-        return len(self.data) > 1
-
-    # Sprawdza czy cała trasa jest zajęta
-    def is_claimed(self):
-        if self.is_double():
-            return self.data[0][1] and self.data[1][1]
-        return self.data[0][1]
-
-    # Zwraca string z niezajętymi częściami trasy
     def to_str(self):
-        res = ''
-        for el in self.data:
-            if not el[1]:
-                res += f'city1: {self.City1.name}, city2: {self.City2.name}, color: {el[0]}, length: {self.length}, locomotives: {self.locomotives}, tunnel: {self.is_tunnel}'
+        res = f'city1: {self.city1}, city2: {self.city2}, color: {self.color}, length: {self.length}, locomotives: {self.locomotives}, tunnel: {self.is_tunnel}, claimed?: {self.is_claimed}'
         return res
 
+    def claim(self, player):
+        self.is_claimed = player.name
 
 
 class City():
@@ -68,7 +56,7 @@ class Board():
     def to_str_freeRoutes(self):
         res = ''
         for route in self.Routes:
-            if not route.is_claimed():
+            if not route.is_claimed:
                 res += f'{route.to_str()}, \n'
         return res
 
@@ -91,7 +79,13 @@ class Board():
     # Zwraca wybrane karty z planszy i podmienia na nowe
     def pick_faceup(self, numbers, cards):
         res = []
+        temp = []
+        print(numbers)
         for number in numbers:
             res.append(self.faceupCards[number])
+        for number in numbers:
+            temp.append(self.faceupCards[number])
+        for el in temp:
+            self.faceupCards.remove(el)
         self.add_faceup_cards(cards)
         return res
