@@ -300,7 +300,23 @@ Wybierz ruch:
             print('Gracz:', self.on_move.name, 'dobrał karty tras.')
 
     def count_points(self, player):
-        pass
+        points = 0
+        d = {1 : 1, 2 : 2, 3 : 4, 4 : 7, 6 : 15, 8 : 21}
+        for route in self.Board.Routes:
+            if route.is_claimed == player:
+                points += d[route.length]
+
+        cities = []
+        for city in self.Board.Cities:
+            for route in city.Routes:
+                if route.is_claimed == player:
+                    cities.append(city.name)
+        
+        for ticket in player.get_TicketCards():
+            if ticket.city1 in cities and ticket.city2 in cities:
+                points += ticket.points
+
+        return points
 
     def play(self):
         starting_player = random.choice(self.Players)
@@ -321,7 +337,7 @@ Wybierz ruch:
 
         print('Gra się zakończyła!')
         for player in self.Players:
-            print(player.name, 'points: ', self.count_points(player))
+            print(player.name, 'points:', self.count_points(player))
 
     # Przygotowanie do rozgrywki
     def start(self):

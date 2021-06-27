@@ -1,6 +1,3 @@
-from typing import Reversible
-
-
 class Player():
     def __init__(self, name, is_bot):
         self.name = name
@@ -18,6 +15,9 @@ class Player():
     def add_TicketCards(self, cards):
         for card in cards:
             self.__TicketCards.append(card)
+
+    def get_TicektCards(self):
+        return self.__TicketCards
     
     def no_tickets(self):
         return len(self.__TicketCards)
@@ -95,13 +95,13 @@ class Player():
         return res
 
     def info(self):
-        res = f'Informacje o graczu\nIlość wagoników: {self.trains}\nKarty tras:\n'
+        res = f'Informacje o graczu\n  Ilość wagoników: {self.trains}\n  Karty tras:\n'
         for card in self.__TicketCards:
-            res += f'  {card.to_str()}\n'
-
+            res += f'    {card.to_str()}\n'
+        res += '  Karty pociągów:\n'
         d = self.__gen_dict_TrainCard()
         for key in d:
-            res += f'  {key} : {d[key]}\n'
+            res += f'    {key} : {d[key]}\n'
         return res
 
     def to_str(self):
